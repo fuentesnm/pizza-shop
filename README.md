@@ -65,7 +65,7 @@ La aplicación está desarrollada con **React** y **Vite**, utiliza **Firebase**
 - `npm run preview`: Inicia un servidor de producción.
 ---
 ### Despliegue en Vercel
-La aplicación está publicada en Vercel. Puedes acceder a ella en https://pizza-shop-flax.vercel.app/.
+- La aplicación está publicada en Vercel. Puedes acceder a ella en https://pizza-shop-flax.vercel.app/.
 ---
 ### Tecnologías utilizadas
 - **React**: Biblioteca de JavaScript para construir interfaces de usuario.
