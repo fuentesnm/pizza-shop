@@ -2,24 +2,30 @@ import { useState, useEffect } from 'react';
 import { collection, doc, getDocs, deleteDoc } from 'firebase/firestore';
 import { db } from '../../config/firebase.js';
 import Product from './Product';
+import Login from '../../Login.jsx';
 
 function Products() {
   const [products, setProducts] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      const querySnapshot = await getDocs(collection(db, 'products'));
-      const productsList = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setProducts(productsList);
-    };
-
-    fetchProducts();
+    const loggedUser = localStorage.getItem('loggedUser');
+    if (loggedUser) {
+      setIsAuthenticated(true);
+      fetchProducts();
+    }
   }, []);
+
+  const fetchProducts = async () => {
+    const querySnapshot = await getDocs(collection(db, 'products'));
+    const productsList = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    setProducts(productsList);
+  };
 
   const openModal = (product = null) => {
     setSelectedProduct(product); 
@@ -41,9 +47,26 @@ function Products() {
     }
   };
 
+  const closeUser = () => {
+    localStorage.removeItem('loggedUser');
+    setIsAuthenticated(false);
+  }
+
+  if (!isAuthenticated) {
+    return <Login onLoginSuccess={() => window.location.reload()} />;
+  }
+
   return (
     <div>
-      <h1 className="title hast-text-centered">Gestión de productos</h1>
+    <section className="hero is-small is-primary">
+      <div className="hero-body">
+        <h1 className="title hast-text-centered">Gestión de productos</h1>
+        <button className="button is-info is-small is-primary" onClick={() => closeUser()}>
+          Cerrar usuario
+        </button>
+      </div>
+    </section>
+    <section className="section">
       <button className="button is-info is-small is-primary" onClick={() => openModal()}>
         Agregar Producto
       </button>
@@ -85,6 +108,7 @@ function Products() {
           ))}
         </tbody>
       </table>
+    </section>
 
       {/* Modal */}
       {isModalOpen && (
@@ -109,3 +133,4 @@ function Products() {
 }
 
 export {Products};
+

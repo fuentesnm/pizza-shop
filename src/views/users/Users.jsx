@@ -2,24 +2,30 @@ import { useState, useEffect } from 'react';
 import { collection, doc, getDocs, deleteDoc } from 'firebase/firestore';
 import { db } from '../../config/firebase.js';
 import User from './User';
+import Login from '../../Login.jsx';
 
 function Users() {
   const [users, setUsers] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      const querySnapshot = await getDocs(collection(db, 'users'));
-      const usersList = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setUsers(usersList);
-    };
-
-    fetchUsers();
+    const loggedUser = localStorage.getItem('loggedUser');
+    if (loggedUser) {
+      setIsAuthenticated(true);
+      fetchUsers();
+    }
   }, []);
+
+  const fetchUsers = async () => {
+    const querySnapshot = await getDocs(collection(db, 'users'));
+    const usersList = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    setUsers(usersList);
+  };
 
   const openModal = (user = null) => {
     setSelectedUser(user); 
@@ -41,9 +47,28 @@ function Users() {
     }
   };
 
+  const closeUser = () => {
+    localStorage.removeItem('loggedUser');
+    setIsAuthenticated(false);
+  }
+
+  if (!isAuthenticated) {
+    return <Login onLoginSuccess={() => window.location.reload()} />;
+  }
+
   return (
     <div>
-      <button className="button is-primary" onClick={() => openModal()}>
+    <section className="hero is-small is-primary">
+      <div className="hero-body">
+        <h1 className="title hast-text-centered">Gestión de usuarios</h1>
+        <button className="button is-info is-small is-primary" onClick={() => closeUser()}>
+          Cerrar usuario
+        </button>
+      </div>
+    </section>
+    <section className="section">
+
+      <button className="button is-info is-small is-primary" onClick={() => openModal()}>
         Agregar Usuario
       </button>
 
@@ -72,7 +97,7 @@ function Users() {
                   Editar
                 </button>
                 <button
-                  className="button is-danger is-small"
+                  className="button is-danger is-small ml-3"
                   onClick={() => deleteUser(user.id)}
                 >
                   Eliminar
@@ -82,6 +107,7 @@ function Users() {
           ))}
         </tbody>
       </table>
+    </section>      
 
       {/* Modal */}
       {isModalOpen && (
