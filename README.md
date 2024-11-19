@@ -51,7 +51,7 @@ La aplicación está desarrollada con **React** y **Vite**, utiliza **Firebase**
    ```bash
    npm run dev
    La aplicación estará disponible en http://localhost:5173.
-   ---
+---
 ### Uso
 - Abre la aplicación en tu navegador.
 - Explora el menú. 
