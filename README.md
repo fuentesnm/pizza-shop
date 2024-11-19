@@ -75,5 +75,5 @@ La aplicación está publicada en Vercel. Puedes acceder a ella en https://pizza
 - **React Router DOM**: Enrutamiento para aplicaciones web.
 ---
 ### Autor
-Este proyecto fue desarrollado por Nicolás Fuentes como parte de un proyecto de exáamen para el curso de React JS de UTN.
+Este proyecto fue desarrollado por Nicolás Fuentes como parte de un proyecto de exámen para el curso de React JS de UTN.
 ---
