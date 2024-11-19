@@ -54,9 +54,9 @@ La aplicación está desarrollada con **React** y **Vite**, utiliza **Firebase**
 ---
 ### Uso
 - Abre la aplicación en tu navegador.
-- Explora el menú. 
-- Registra un usuario o inicia sesión.
-- Agrega productos y administra tus pedidos.
+- Explora el menú de pizzas.
+- Ingresa a la gestion de productos a traves de la ruta /products. Si no tienes usuarios el sistema solicitará uno. Ingrese con el usuario admin y la password 11111.
+- Ingresa a la gestion de usuarios a traves de la ruta /users. Si no tienes usuarios el sistema solicitará uno. Ingrese con el usuario admin y la password 11111.
 - Utiliza la interfaz de usuario para interactuar con la aplicación.
 ---
 ### Scripts disponibles
