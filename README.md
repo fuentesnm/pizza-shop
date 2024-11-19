@@ -47,7 +47,7 @@ La aplicación está desarrollada con **React** y **Vite**, utiliza **Firebase**
     VITE_APP_ID= 
    ```
    - Reemplaza los valores con las credenciales de tu proyecto Firebase.
-   4. **Inicia la aplicación:**
+4. **Inicia la aplicación:**
    ```bash
    npm run dev
    La aplicación estará disponible en http://localhost:5173.
@@ -75,5 +75,5 @@ La aplicación está publicada en Vercel. Puedes acceder a ella en https://pizza
 - **React Router DOM**: Enrutamiento para aplicaciones web.
 ---
 ### Autor
-Este proyecto fue desarrollado por Nicolás Fuentes como parte de un proyecto de exámen para el curso de React JS de UTN.
+- Este proyecto fue desarrollado por Nicolás Fuentes como parte de un proyecto de exámen para el curso de React JS de UTN.
 ---
